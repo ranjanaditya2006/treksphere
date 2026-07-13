@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Update Trek{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <h3 class="h4 mb-3">Update {{ trek.name }}</h3>
+        <form method="post" class="row g-3">
+          <div class="col-12"><label class="form-label">Available Slots</label><input type="number" class="form-control" name="available_slots" value="{{ trek.available_slots }}" required></div>
+          <div class="col-12"><label class="form-label">Status</label><select class="form-select" name="status">{% for s in ['Open','Closed','Completed'] %}<option value="{{ s }}" {% if trek.status == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></div>
+          <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" rows="4" name="description">{{ trek.description }}</textarea></div>
+          <div class="col-12 d-grid"><button class="btn btn-success">Update Trek</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <h4 class="mb-3">Registered Trekkers</h4>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead><tr><th>Booking ID</th><th>Name</th><th>Email</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody>
+              {% for booking in bookings %}
+              <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.trekker.name }}</td>
+                <td>{{ booking.trekker.email }}</td>
+                <td>{{ booking.status }}</td>
+                <td>{{ booking.booking_date.strftime('%d %b %Y') }}</td>
+              </tr>
+              {% else %}
+              <tr><td colspan="5" class="text-muted">No trekkers booked yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Search Records{% endblock %}
+{% block content %}
+<h2 class="mb-3">Search Treks, Staff, and Users</h2>
+<form class="row g-2 mb-4" method="get">
+  <div class="col-md-10"><input class="form-control" name="q" placeholder="Search by ID, name, email, or location" value="{{ q }}"></div>
+  <div class="col-md-2 d-grid"><button class="btn btn-success">Search</button></div>
+</form>
+<div class="row g-4">
+  <div class="col-lg-4"><div class="card border-0 shadow-sm"><div class="card-body"><h5>Treks</h5>{% for item in treks %}<p class="mb-2">#{{ item.id }} - {{ item.name }}</p>{% else %}<p class="text-muted">No matching treks.</p>{% endfor %}</div></div></div>
+  <div class="col-lg-4"><div class="card border-0 shadow-sm"><div class="card-body"><h5>Staff</h5>{% for item in staff_members %}<p class="mb-2">#{{ item.id }} - {{ item.name }}</p>{% else %}<p class="text-muted">No matching staff.</p>{% endfor %}</div></div></div>
+  <div class="col-lg-4"><div class="card border-0 shadow-sm"><div class="card-body"><h5>Users</h5>{% for item in users %}<p class="mb-2">#{{ item.id }} - {{ item.name }}</p>{% else %}<p class="text-muted">No matching users.</p>{% endfor %}</div></div></div>
+</div>
+{% endblock %}

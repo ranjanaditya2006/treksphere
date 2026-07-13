@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<h2 class="mb-3">Trekkers</h2>
+<div class="table-responsive bg-white rounded-4 shadow-sm p-3">
+<table class="table align-middle">
+  <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Blacklisted</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ 'Yes' if user.blacklisted else 'No' }}</td>
+      <td><form method="post" action="{{ url_for('admin.toggle_blacklist', user_id=user.id) }}"><button class="btn btn-sm btn-outline-danger">{{ 'Unblacklist' if user.blacklisted else 'Blacklist' }}</button></form></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
